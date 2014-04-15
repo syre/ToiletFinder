@@ -3,6 +3,6 @@
 
     <string name="app_name">ToiletFinder</string>
     <string name="action_settings">Settings</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="toilet_list_item_progressbar">Methane</string>
 
 </resources>
