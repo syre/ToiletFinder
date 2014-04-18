@@ -1,5 +1,7 @@
 package com.example.toiletfinder;
 
+import android.content.res.Resources;
+
 public class Toilet
 {
 	private Integer id;
@@ -36,7 +38,6 @@ public class Toilet
 	{
 		return occupied;
 	}
-
 
 	public void setOccupied(Boolean occupied)
 	{

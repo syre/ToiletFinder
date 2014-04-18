@@ -1,6 +1,7 @@
 package com.example.toiletfinder;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +11,11 @@ import android.widget.TextView;
 import android.app.Activity;
 import java.util.List;
 
-public class ToiletListAdapter extends ArrayAdapter 
+public class ToiletListAdapter extends ArrayAdapter<Toilet>
 { 
 	private Context context;
 	
-	public ToiletListAdapter(Context context, List items) 
+	public ToiletListAdapter(Context context, List<Toilet> items) 
 	{ 
 		super(context, android.R.layout.simple_list_item_1, items);
 		this.context = context; 
@@ -26,6 +27,7 @@ public class ToiletListAdapter extends ArrayAdapter
 		TextView titleText;
 		TextView occupied;
 		ProgressBar methane_level;
+		
 	} 
 
 	public View getView(int position, View convertView, ViewGroup parent)
@@ -49,12 +51,13 @@ public class ToiletListAdapter extends ArrayAdapter
 		{
 			viewToUse = convertView; 
 			holder = (ViewHolder) viewToUse.getTag();
-		} 
+		}
+		Resources res = context.getResources();
 		
 		holder.titleText.setText(item.getName());
 		holder.methane_level.setProgress(item.getMethane_level());
 		holder.methane_level.setIndeterminate(false);
-		holder.occupied.setText(item.getOccupied().toString());
+		holder.occupied.setText(item.getOccupied() ? res.getText(R.string.toilet_list_item_occupied) : res.getText(R.string.toilet_list_item_not_occupied));
 		return viewToUse; 
 	}
 }

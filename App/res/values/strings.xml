@@ -3,6 +3,8 @@
 
     <string name="app_name">ToiletFinder</string>
     <string name="action_settings">Settings</string>
-    <string name="toilet_list_item_progressbar">Methane</string>
+    <string name="toilet_list_item_progressbar">Metan niveau</string>
+    <string name="toilet_list_item_occupied">Optaget</string>
+    <string name="toilet_list_item_not_occupied">Ledigt</string>
 
 </resources>

@@ -15,7 +15,7 @@ import android.widget.Toast;
 public class ToiletListFragment extends ListFragment
 {
 	private List<Toilet> toiletListItemList;
-	private ArrayAdapter adapter;
+	private ArrayAdapter<Toilet> adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
