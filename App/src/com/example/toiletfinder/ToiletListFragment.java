@@ -14,17 +14,12 @@ import android.widget.Toast;
 
 public class ToiletListFragment extends ListFragment
 {
-	private List<Toilet> toiletListItemList;
 	private ArrayAdapter<Toilet> adapter;
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		toiletListItemList = new ArrayList<Toilet>();
-		toiletListItemList.add(new Toilet(0, "Toilet 1", "Til højre for springvandet", false, 23));
-		toiletListItemList.add(new Toilet(1, "Toilet 2", "til venstre for springvandet", true, 70 ));
-		toiletListItemList.add(new Toilet(2, "Toilet 3", "Til højre for dammen", true, 99));
-		adapter = new ToiletListAdapter(getActivity(), toiletListItemList);
+		adapter = new ToiletListAdapter(getActivity(), ToiletStorage.getToilets());
 		setListAdapter(adapter);
 		
 		return super.onCreateView(inflater, container, savedInstanceState);
@@ -33,7 +28,7 @@ public class ToiletListFragment extends ListFragment
 	@Override
 	public void onListItemClick(ListView parent, View view, int position, long id)
 	{
-		Toilet item = this.toiletListItemList.get(position);
+		Toilet item = ToiletStorage.getToilets().get(position);
 		Toast.makeText(getActivity(), item.getName() + " Clicked!" , Toast.LENGTH_SHORT).show();
 	}
 }

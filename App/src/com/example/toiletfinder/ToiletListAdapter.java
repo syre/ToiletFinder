@@ -34,24 +34,14 @@ public class ToiletListAdapter extends ArrayAdapter<Toilet>
 	{ 
 		ViewHolder holder = null;
 		Toilet item = (Toilet)getItem(position);
-		View viewToUse = null;
-		// This block exists to inflate the settings list item conditionally based on whether
-		// we want to support a grid or list view.
 		LayoutInflater mInflater = (LayoutInflater) context .getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-		if (convertView == null) 
-		{ 
-			viewToUse = mInflater.inflate(R.layout.toilet_list_item, null);
-			holder = new ViewHolder();
-			holder.titleText = (TextView)viewToUse.findViewById(R.id.titleTextView);
-			holder.occupied = (TextView)viewToUse.findViewById(R.id.occupiedTextView);
-			holder.methane_level = (ProgressBar)viewToUse.findViewById(R.id.methane_level_bar);
-			viewToUse.setTag(holder);
-		} 
-		else 
-		{
-			viewToUse = convertView; 
-			holder = (ViewHolder) viewToUse.getTag();
-		}
+
+		View viewToUse = mInflater.inflate(R.layout.toilet_list_item, null);
+		holder = new ViewHolder();
+		holder.titleText = (TextView)viewToUse.findViewById(R.id.titleTextView);
+		holder.occupied = (TextView)viewToUse.findViewById(R.id.occupiedTextView);
+		holder.methane_level = (ProgressBar)viewToUse.findViewById(R.id.methane_level_bar);
+		viewToUse.setTag(holder);
 		Resources res = context.getResources();
 		
 		holder.titleText.setText(item.getName());
