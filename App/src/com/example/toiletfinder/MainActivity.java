@@ -28,7 +28,7 @@ public class MainActivity extends Activity {
     {
     	Toast.makeText(this, "connecting to broker!", Toast.LENGTH_SHORT).show();
     	Log.d("ToiletFinder", "Connecting to broker");
-    	consumer = new MQConsumer(ToiletStorage.SERVERHOSTNAME, "logs", "fanout");
+    	consumer = new MQConsumer(RESTHelper.SERVERHOSTNAME, "logs", "fanout");
         consumer.connectToBroker();
         consumer.setOnReceiveMessageHandler(new onReceiveMessageHandler()
         {

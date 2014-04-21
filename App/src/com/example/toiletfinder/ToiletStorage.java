@@ -19,7 +19,6 @@ import android.util.Pair;
 
 public class ToiletStorage
 {
-	public static final String SERVERHOSTNAME = "http://10.0.2.2";
 	
 	private static Toilet findToilet(Integer id)
 	{
@@ -57,45 +56,12 @@ public class ToiletStorage
 		return null;
 	}
 	
-	private static class HttpGetTask extends AsyncTask<Void,Void,String>
-	{
 
-		@Override
-		protected String doInBackground(Void... params)
-		{
-			return retrieveToiletsFromREST();
-		}
-		
-	}
-	private static String retrieveToiletsFromREST()
-	{
-		String port = "5000";
-		String rest_url = SERVERHOSTNAME+":"+port+"/toilets/";
-		HttpURLConnection connection = null;
-		String requeststring = null;
-		try
-		{
-			URL url = new URL(rest_url);
-			connection = (HttpURLConnection) url.openConnection();
-			InputStream input = new BufferedInputStream(connection.getInputStream());
-			requeststring = IOUtils.toString(input);
-		} catch (Exception e)
-		{
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		finally
-		{
-			if (connection != null)
-				connection.disconnect();
-		}
-		Log.d("ToiletFinder", requeststring);
-		return requeststring;
-	}
+	
 	
 	public static Boolean fetchToilets()
 	{
-		AsyncTask<Void, Void, String> result = new HttpGetTask().execute();
+		AsyncTask<Void, Void, String> result = new RESTHelper.ToiletRetrieverTask().execute();
 
 		try
 		{
