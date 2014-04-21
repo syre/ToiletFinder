@@ -44,7 +44,7 @@ public class ToiletListAdapter extends ArrayAdapter<Toilet>
 		viewToUse.setTag(holder);
 		Resources res = context.getResources();
 		
-		holder.titleText.setText(item.getName());
+		holder.titleText.setText(item.getDescription());
 		holder.methane_level.setProgress(item.getMethane_level());
 		holder.methane_level.setIndeterminate(false);
 		holder.occupied.setText(item.getOccupied() ? res.getText(R.string.toilet_list_item_occupied) : res.getText(R.string.toilet_list_item_not_occupied));

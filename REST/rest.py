@@ -30,11 +30,11 @@ def close_connection(exception):
 @app.route('/toilets/')
 def index():
 	result = query_db('select * from toilets')
-	arguments = ['id', 'name', 'lat', 'lng', 'occupied', 'description']
+	arguments = ['id', 'description', 'location', 'occupied', 'methane_level', 'lat', "lng"]
 	list = []
 	for toilet in result:
 		list.append(dict(zip(arguments, toilet)))
 	return flask.jsonify(results = list)
 
 if __name__ == '__main__':
-	app.run(debug = True)
+	app.run(debug = True, port=5000)

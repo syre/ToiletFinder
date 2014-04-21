@@ -54,6 +54,11 @@ public class IMQConnector
 				return false;
 			}
 		}
+		@Override
+		protected void onPostExecute(Boolean b)
+		{
+			super.onPostExecute(b);
+		}
 	}
 	
 	public void dispose() throws Exception
