@@ -1,6 +1,5 @@
 package com.example.toiletfinder;
 
-
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -25,25 +24,6 @@ public class IMQConnector
 		this.server = server;
 		this.exchange = exchange;
 		this.exchangetype = exchangetype;
-	}
-	
-	public void Dispose() throws Exception
-	{
-		try
-		{
-			if (connection != null)
-			{
-				connection.close();
-			}
-			if (model != null)
-			{
-				model.abort();
-			}
-		}
-		catch (Exception e)
-		{
-			System.out.print("Error attempting to close connection: "+e);
-		}
 	}
 	
 	private class ConnectToBrokerTask extends AsyncTask<Void,Void,Boolean>
@@ -76,6 +56,25 @@ public class IMQConnector
 		}
 	}
 	
+	public void dispose() throws Exception
+	{
+		try
+		{
+			if (connection != null)
+			{
+				connection.close();
+			}
+			if (model != null)
+			{
+				model.abort();
+			}
+		}
+		catch (Exception e)
+		{
+			System.out.print("Error attempting to close connection: "+e);
+		}
+	}
+	
 	public boolean connectToBroker()
 	{
 		AsyncTask<Void, Void, Boolean> result = new ConnectToBrokerTask().execute();
@@ -83,9 +82,9 @@ public class IMQConnector
 		{
 			return result.get();
 		} 
-		catch (Exception E)
+		catch (Exception e)
 		{
-			E.printStackTrace();
+			System.out.print("Error attempting to retrieve connect result: "+e);
 			return false;
 		}
 		

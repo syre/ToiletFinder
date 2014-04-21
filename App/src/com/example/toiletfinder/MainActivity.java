@@ -1,8 +1,5 @@
 package com.example.toiletfinder;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.example.toiletfinder.MQConsumer.onReceiveMessageHandler;
 
 import android.os.Bundle;
@@ -10,7 +7,6 @@ import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.Toast;
 public class MainActivity extends Activity {
 
@@ -62,7 +58,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onResume()
     {
-    	super.onPause();
+    	super.onResume();
     	
     }
     
@@ -70,7 +66,8 @@ public class MainActivity extends Activity {
     protected void onPause()
     {
     	super.onPause();
-    	consumer.dispose();
+    	if (consumer != null)
+    		consumer.dispose();
     }
     
 }

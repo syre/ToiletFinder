@@ -6,6 +6,8 @@ import java.util.List;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Pair;
+
 public class ToiletStorage
 {
 	private static Toilet findToilet(Integer id)
@@ -18,8 +20,8 @@ public class ToiletStorage
 	
 	@SuppressWarnings("serial")
 	private static List<Toilet> toilets = new ArrayList<Toilet>() {{
-			add(new Toilet(0, "Toilet 1", "Til højre for springvandet", false, 23));
-			add(new Toilet(1, "Toilet 2", "til venstre for springvandet", true, 70 ));	}};
+			add(new Toilet(0, "Toilet 1", "Til højre for springvandet", false, 23, new Pair<Double, Double>(56.130561, 9.546643)));
+			add(new Toilet(1, "Toilet 2", "til venstre for springvandet", true, 70, new Pair<Double, Double>(55.785955, 12.524138) ));	}};
 	
 	public static List<Toilet> getToilets()
 	{

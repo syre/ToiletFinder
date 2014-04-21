@@ -1,23 +1,36 @@
 package com.example.toiletfinder;
 
+import android.util.Pair;
+
 public class Toilet
 {
 	private Integer id;
-	private String name;
+	private String description;
 	private String location;
 	private Boolean occupied;
 	private Integer methane_level;
+	private Pair<Double, Double> latlng;
 	
-	
-	public Toilet(Integer id, String name, String location, Boolean occupied, Integer methane_level)
+	public Toilet(Integer id, String description, String location, Boolean occupied, Integer methane_level, Pair<Double, Double> latlng)
 	{ 
 		this.setId(id);
-		this.setName(name);
+		this.setDescription(description);
 		this.setLocation(location);
 		this.setOccupied(occupied);
 		this.setMethane_level(methane_level);
+		this.setLatLng(latlng);
 	}
 
+
+	public void setLatLng(Pair<Double, Double> latlng)
+	{
+		this.latlng = latlng;
+		
+	}
+	public Pair<Double, Double> getLatLng()
+	{
+		return latlng;
+	}
 
 	public Integer getMethane_level()
 	{
@@ -67,15 +80,14 @@ public class Toilet
 	}
 
 
-	public String getName()
+	public String getDescription()
 	{
-		return name;
+		return description;
 	}
 
 
-	public void setName(String name)
+	public void setDescription(String description)
 	{
-		this.name = name;
+		this.description = description;
 	}
-	
 }

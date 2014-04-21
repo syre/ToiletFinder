@@ -37,7 +37,7 @@ public class MQConsumer extends IMQConnector
 	{
 		public void run()
 		{
-			Consume();
+			consume();
 		}
 	};
 	
@@ -94,7 +94,7 @@ public class MQConsumer extends IMQConnector
         this.handler = handler;
     };
     
-	private void Consume()
+	private void consume()
 	{
 		Thread thread = new Thread()
 		{
@@ -113,7 +113,7 @@ public class MQConsumer extends IMQConnector
 					}
 					catch(Exception e)
 					{
-						Log.d("ToiletFinder","Exception was caught in Consume: "+e);
+						Log.d("ToiletFinder","Exception was caught in consume: "+e);
 					}
 				}
 			}

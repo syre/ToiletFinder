@@ -6,6 +6,6 @@
     <string name="toilet_list_item_progressbar">Methane</string>
     <string name="toilet_list_item_occupied">Occupied</string>
     <string name="toilet_list_item_not_occupied">Available</string>
-    <string name="fetchtoiletsbuttontext">Receive Updates (10m)</string>
+    <string name="fetchtoiletsbuttontext">Receive Updates</string>
 
 </resources>

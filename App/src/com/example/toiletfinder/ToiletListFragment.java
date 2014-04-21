@@ -1,9 +1,8 @@
 package com.example.toiletfinder;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.ListFragment;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +28,9 @@ public class ToiletListFragment extends ListFragment
 	public void onListItemClick(ListView parent, View view, int position, long id)
 	{
 		Toilet item = ToiletStorage.getToilets().get(position);
+		Intent intent = new Intent(android.content.Intent.ACTION_VIEW, 
+			    Uri.parse("https://maps.google.com/maps?q=loc:"+item.getLatLng().first+","+item.getLatLng().second));
+			startActivity(intent);
 		Toast.makeText(getActivity(), item.getName() + " Clicked!" , Toast.LENGTH_SHORT).show();
 	}
 }
