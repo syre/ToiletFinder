@@ -1,4 +1,4 @@
-#!flask/bin/python
+#!/usr/bin/python3
 import flask
 import sqlite3
 
