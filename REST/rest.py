@@ -13,7 +13,7 @@ def get_db():
 	db = getattr(flask.g, '_database', None)
 	if db is None:
 		db = flask.g._database = connect_db()
-		return db
+	return db
 
 def query_db(query, args=(), one=False):
     cur = get_db().execute(query, args)
@@ -27,14 +27,20 @@ def close_connection(exception):
 	if db is not None:
 		db.close()
 
-@app.route('/toilets/')
+@app.route('/toiletgroups/')
 def index():
-	result = query_db('select * from toilets')
-	arguments = ['id', 'description', 'location', 'occupied', 'methane_level', 'lat', "lng"]
-	list = []
-	for toilet in result:
-		list.append(dict(zip(arguments, toilet)))
-	return flask.jsonify(results = list)
+    group_result = query_db('select * from toilet_group')
+    group_arguments = ["id", "name", "lat", "lng"]
+    toilet_arguments = ['id', 'group_id', 'description', 'location', 'occupied', 'methane_level', 'lat', "lng"]
+    list = []
+    for group in group_result:
+        groupdict = dict(zip(group_arguments, group))
+        toilet_result = query_db('select * from toilets where group_id == ?', [group[0]])
+        groupdict['toilets'] = []
+        for toilet in toilet_result:
+            groupdict['toilets'].append(dict(zip(toilet_arguments, toilet)))
+    list.append(groupdict)
+    return flask.jsonify(groups = list)
 
 if __name__ == '__main__':
 	app.run(debug = True, port=5000)
