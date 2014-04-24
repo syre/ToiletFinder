@@ -38,4 +38,4 @@
        android:text="@string/toilet_list_item_progressbar"/>
   </RelativeLayout>
 </FrameLayout>
-</LinearLayout><!-- From: file:/home/syre/builds/App/app/src/main/res/layout/toilet_list_item.xml -->
+</LinearLayout><!-- From: file:/home/syre/builds/ToiletFinder/App/app/src/main/res/layout/toilet_list_item.xml -->

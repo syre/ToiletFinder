@@ -1,4 +1,4 @@
-<!-- From: file:/home/syre/builds/App/app/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.example.toiletfinder">
+<!-- From: file:/home/syre/builds/ToiletFinder/App/app/src/main/AndroidManifest.xml --><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.example.toiletfinder">
 
     <uses-sdk android:minSdkVersion="11" android:targetSdkVersion="19"/>
     

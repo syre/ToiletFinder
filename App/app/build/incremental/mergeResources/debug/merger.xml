@@ -2,9 +2,9 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="/home/syre/builds/App/app/src/main/res" >
+        <source path="/home/syre/builds/ToiletFinder/App/app/src/main/res" >
             <file
-                path="/home/syre/builds/App/app/src/main/res/values/styles.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/values/styles.xml"
                 qualifiers="" >
 
                 <style
@@ -26,7 +26,7 @@
                 </style>
             </file>
             <file
-                path="/home/syre/builds/App/app/src/main/res/values/strings.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/values/strings.xml"
                 qualifiers="" >
                 <string name="action_settings" >Settings
                 </string>
@@ -42,7 +42,7 @@
                 </string>
             </file>
             <file
-                path="/home/syre/builds/App/app/src/main/res/values/dimens.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/values/dimens.xml"
                 qualifiers="" >
                 <dimen name="activity_vertical_margin" >16dp
                 </dimen>
@@ -51,31 +51,31 @@
             </file>
             <file
                 name="ic_launcher"
-                path="/home/syre/builds/App/app/src/main/res/drawable-hdpi/ic_launcher.png"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/drawable-hdpi/ic_launcher.png"
                 qualifiers="hdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/home/syre/builds/App/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/drawable-xxhdpi/ic_launcher.png"
                 qualifiers="xxhdpi"
                 type="drawable" />
             <file
                 name="toilet_list_item"
-                path="/home/syre/builds/App/app/src/main/res/layout/toilet_list_item.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/layout/toilet_list_item.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="activity_main"
-                path="/home/syre/builds/App/app/src/main/res/layout/activity_main.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/layout/activity_main.xml"
                 qualifiers=""
                 type="layout" />
             <file
                 name="main"
-                path="/home/syre/builds/App/app/src/main/res/menu/main.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/menu/main.xml"
                 qualifiers=""
                 type="menu" />
             <file
-                path="/home/syre/builds/App/app/src/main/res/values-v14/styles.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/values-v14/styles.xml"
                 qualifiers="v14" >
 
                 <style
@@ -86,23 +86,23 @@
                 </style>
             </file>
             <file
-                path="/home/syre/builds/App/app/src/main/res/values-sw720dp-land/dimens.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/values-sw720dp-land/dimens.xml"
                 qualifiers="sw720dp-land" >
                 <dimen name="activity_horizontal_margin" >128dp
                 </dimen>
             </file>
             <file
                 name="ic_launcher"
-                path="/home/syre/builds/App/app/src/main/res/drawable-mdpi/ic_launcher.png"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/drawable-mdpi/ic_launcher.png"
                 qualifiers="mdpi"
                 type="drawable" />
             <file
                 name="ic_launcher"
-                path="/home/syre/builds/App/app/src/main/res/drawable-xhdpi/ic_launcher.png"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/drawable-xhdpi/ic_launcher.png"
                 qualifiers="xhdpi"
                 type="drawable" />
             <file
-                path="/home/syre/builds/App/app/src/main/res/values-v11/styles.xml"
+                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/values-v11/styles.xml"
                 qualifiers="v11" >
 
                 <style
@@ -113,11 +113,11 @@
                 </style>
             </file>
         </source>
-        <source path="/home/syre/builds/App/app/build/res/rs/debug" />
-        <source path="/home/syre/builds/App/app/build/res/generated/debug" />
+        <source path="/home/syre/builds/ToiletFinder/App/app/build/res/rs/debug" />
+        <source path="/home/syre/builds/ToiletFinder/App/app/build/res/generated/debug" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/home/syre/builds/App/app/src/debug/res" />
+        <source path="/home/syre/builds/ToiletFinder/App/app/src/debug/res" />
     </dataSet>
 
 </merger>
