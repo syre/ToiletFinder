@@ -12,7 +12,7 @@ import android.util.Log;
 
 public class RESTHelper
 {
-	public static final String SERVERHOSTNAME = "10.0.2.2";
+	public static final String SERVERHOSTNAME = "192.168.1.202";
 	
 	public static class ToiletRetrieverTask extends AsyncTask<Void,Void,String>
 	{
@@ -28,7 +28,7 @@ public class RESTHelper
 	{
 		String port = "5000";
 		String protocol = "http://";
-		String rest_url = protocol+SERVERHOSTNAME+":"+port+"/toilets/";
+		String rest_url = protocol+SERVERHOSTNAME+":"+port+"/toiletgroups/";
 		HttpURLConnection connection = null;
 		String requeststring = null;
 		try
@@ -39,7 +39,6 @@ public class RESTHelper
 			requeststring = IOUtils.toString(input);
 		} catch (Exception e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		finally

@@ -20,20 +20,20 @@ import android.util.Pair;
 public class ToiletStorage
 {
 	
-	private static Toilet findToilet(Integer id)
+	private static Toilet findToilet(List<Toilet> toilets, Integer id)
 	{
-		for (Toilet t : toiletlist)
+		for (Toilet t : toilets)
 			if (t.getId() == id)
 				return t;
 		return null;
 	}
 	
 	@SuppressWarnings("serial")
-	private static List<Toilet> toiletlist = new ArrayList<Toilet>();
+	private static List<ToiletGroup> toiletgrouplist = new ArrayList<ToiletGroup>();
 	
-	public static List<Toilet> getToilets()
+	public static List<ToiletGroup> getToiletGroups()
 	{
-		return toiletlist;
+		return toiletgrouplist;
 	}
 	
 	public static Boolean updateToilet(String message)
@@ -41,8 +41,9 @@ public class ToiletStorage
 		try
 		{
 			JSONObject object = new JSONObject(message);
+            Integer group_id = (Integer)object.get("group_id");
 			Integer id = (Integer)object.get("id");
-			Toilet toilet = toiletlist.get(toiletlist.indexOf(findToilet(id)));
+			Toilet toilet = findToilet(toiletgrouplist.get(group_id).getToilets(), id);
 			if (object.get("occupied") != null)
 				toilet.setOccupied((Boolean)object.get("occupied"));
 			if (object.get("methane_level") != null)
@@ -67,19 +68,30 @@ public class ToiletStorage
 		{
 			String request = result.get();
 			JSONObject obj = new JSONObject(request);
-			JSONArray toilets = obj.getJSONArray("results");
-			for (int i = 0; i < toilets.length(); i++)
+			JSONArray toiletgroup = obj.getJSONArray("groups");
+			for (int i = 0; i < toiletgroup.length(); i++)
 			{
-				Integer id = Integer.parseInt(toilets.getJSONObject(i).getString("id"));
-				String description = toilets.getJSONObject(i).getString("description");
-				String location = toilets.getJSONObject(i).getString("location");
-				Boolean occupied = (Integer.parseInt(toilets.getJSONObject(i).getString("occupied")) == 1 ? true : false);
-				Integer methane_level = (Integer.parseInt(toilets.getJSONObject(i).getString("methane_level")));
-				Double lat = Double.parseDouble(toilets.getJSONObject(i).getString("lat"));
-				Double lng = Double.parseDouble(toilets.getJSONObject(i).getString("lng"));
-				toiletlist.add(new Toilet(id, description, location, occupied, methane_level, new Pair<Double, Double>(lat, lng)));
-			}
-			Log.d("ToiletFinder", toiletlist.toString());
+				Integer id = Integer.parseInt(toiletgroup.getJSONObject(i).getString("id"));
+                Double lat = Double.parseDouble(toiletgroup.getJSONObject(i).getString("lat"));
+                Double lng = Double.parseDouble(toiletgroup.getJSONObject(i).getString("lng"));
+                String name = (toiletgroup.getJSONObject(i).getString("name"));
+                JSONArray toilets = (toiletgroup.getJSONObject(i).getJSONArray("toilets"));
+                List<Toilet> toiletlistforgroup = new ArrayList<Toilet>();
+                for (int j = 0; j < toilets.length(); j++)
+                {
+                    Integer toilet_id = Integer.parseInt(toilets.getJSONObject(i).getString("id"));
+                    String description = toilets.getJSONObject(i).getString("description");
+				    String location = toilets.getJSONObject(i).getString("location");
+				    Boolean occupied = (Integer.parseInt(toilets.getJSONObject(i).getString("occupied")) == 1 ? true : false);
+				    Integer methane_level = (Integer.parseInt(toilets.getJSONObject(i).getString("methane_level")));
+				    Double toilet_lat = Double.parseDouble(toilets.getJSONObject(i).getString("lat"));
+				    Double toilet_lng = Double.parseDouble(toilets.getJSONObject(i).getString("lng"));
+				    toiletlistforgroup.add(new Toilet(toilet_id, id, description, location, occupied, methane_level, new Pair<Double, Double>(toilet_lat, toilet_lng)));
+                }
+                toiletgrouplist.add(new ToiletGroup(id, new Pair<Double, Double>(lat,lng), name, toiletlistforgroup));
+
+            }
+			Log.d("ToiletFinder", toiletgroup.toString());
 			return true;
 		} catch (Exception e)
 		{

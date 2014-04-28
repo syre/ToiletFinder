@@ -42,5 +42,10 @@ def index():
     list.append(groupdict)
     return flask.jsonify(groups = list)
 
+@app.route("/toiletgroups/nearest/<lat>+<lng>")
+def findNearest15(lat=None, lng=None):
+    results = flask.request.args.get("results")
+    return results
+
 if __name__ == '__main__':
-	app.run(debug = True, port=5000)
+	app.run(host="0.0.0.0", debug = True, port=5000)

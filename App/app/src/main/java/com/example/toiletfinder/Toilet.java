@@ -5,15 +5,17 @@ import android.util.Pair;
 public class Toilet
 {
 	private Integer id;
-	private String description;
+	private Integer group_id;
+    private String description;
 	private String location;
 	private Boolean occupied;
 	private Integer methane_level;
 	private Pair<Double, Double> latlng;
 	
-	public Toilet(Integer id, String description, String location, Boolean occupied, Integer methane_level, Pair<Double, Double> latlng)
+	public Toilet(Integer id, Integer group_id, String description, String location, Boolean occupied, Integer methane_level, Pair<Double, Double> latlng)
 	{ 
 		this.setId(id);
+        this.setGroupId(group_id);
 		this.setDescription(description);
 		this.setLocation(location);
 		this.setOccupied(occupied);
@@ -31,6 +33,16 @@ public class Toilet
 	{
 		return latlng;
 	}
+
+    public void setGroupId(Integer groupid)
+    {
+        this.group_id = groupid;
+    }
+
+    public Integer getGroupId()
+    {
+        return this.group_id;
+    }
 
 	public Integer getMethane_level()
 	{
