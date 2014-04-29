@@ -25,6 +25,7 @@ public class RESTHelper
 		}
 		
 	}
+
 	public static String retrieveToiletsFromREST(Integer id)
 	{
 
@@ -33,13 +34,14 @@ public class RESTHelper
 		String rest_url = (id != null ? protocol+SERVERHOSTNAME+":"+port+"/toiletgroups/"+id :
                                         protocol+SERVERHOSTNAME+":"+port+"/toiletgroups/");
 		HttpURLConnection connection = null;
-		String requeststring = null;
+		String requeststring = "";
 		try
 		{
 			URL url = new URL(rest_url);
 			connection = (HttpURLConnection) url.openConnection();
 			InputStream input = new BufferedInputStream(connection.getInputStream());
 			requeststring = IOUtils.toString(input);
+            Log.d("ToiletFinder", requeststring);
 		} catch (Exception e)
 		{
 			e.printStackTrace();
@@ -49,7 +51,6 @@ public class RESTHelper
 			if (connection != null)
 				connection.disconnect();
 		}
-		Log.d("ToiletFinder", requeststring);
 		return requeststring;
 	}
 }
