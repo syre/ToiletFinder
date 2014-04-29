@@ -36,7 +36,7 @@ def Groupindex():
     groupdict = {}
     for group in group_result:
         groupdict = dict(zip(group_arguments, group))
-        toilet_result = query_db("select * from toilets where group_id == ?", [group[0]])
+        toilet_result = query_db("select * from toilets where group_id == ?", (group[0],))
         groupdict["toilets"] = []
         for toilet in toilet_result:
             groupdict["toilets"].append(dict(zip(toilet_arguments, toilet)))
@@ -52,7 +52,7 @@ def specificGroupIndex(id=None):
     groupdict = {}
     for group in group_result:
         groupdict = dict(zip(group_arguments, group))
-        toilet_result = query_db("select * from toilets where group_id == ?", [group[0]])
+        toilet_result = query_db("select * from toilets where group_id == ?", (group[0],))
         groupdict["toilets"] = []
         for toilet in toilet_result:
             groupdict["toilets"].append(dict(zip(toilet_arguments, toilet)))
@@ -61,7 +61,7 @@ def specificGroupIndex(id=None):
 
 @app.route("/events/<id>")
 def specificEventIndex(id=None):
-    event_result = query_db("select * from events where group_id == ?", id)
+    event_result = query_db("select * from events where group_id == ?", (id,))
     event_arguments = ["id", "group_id", "toilet_id", "methane_level", "occupied", "time_stamp"]
     list = []
     eventdict = {}
