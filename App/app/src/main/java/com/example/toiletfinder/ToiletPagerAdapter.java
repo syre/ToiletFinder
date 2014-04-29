@@ -14,28 +14,40 @@ import java.util.List;
 public class ToiletPagerAdapter extends FragmentPagerAdapter
 {
     final int PAGE_COUNT = 2;
+    private FragmentManager fragmentmanager;
+    private List<Fragment> fragmentlist;
     public ToiletPagerAdapter(FragmentManager fm)
     {
         super(fm);
+        fragmentmanager = fm;
+        fragmentlist = new ArrayList<Fragment>();
+        fragmentlist.add(new ToiletListFragment());
+        fragmentlist.add(new ToiletMapFragment());
     }
 
     @Override
     public Fragment getItem(int position)
     {
-        switch(position)
-        {
-            case 0:
-                return new ToiletListFragment();
-            case 1:
-                return new ToiletMapFragment();
-            default:
-                return null;
-        }
+        String name = makeFragmentName(R.id.pager, position);
+        Fragment f = fragmentmanager.findFragmentByTag(name);
+            switch(position)
+            {
+                case(0):
+                    return new ToiletListFragment();
+                case(1):
+                    return new ToiletMapFragment();
+                default:
+                    return new ToiletListFragment();
+            }
     }
 
     @Override
     public int getCount()
     {
         return PAGE_COUNT;
+    }
+
+    private static String makeFragmentName(int viewId, int index) {
+        return "android:switcher:" + viewId + ":" + index;
     }
 }

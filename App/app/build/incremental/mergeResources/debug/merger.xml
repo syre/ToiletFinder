@@ -7167,11 +7167,6 @@
                 path="/home/syre/builds/ToiletFinder/App/app/src/main/res/drawable-xxhdpi/toilet.png"
                 qualifiers="xxhdpi"
                 type="drawable" />
-            <file
-                name="toiletgroup_infowindow"
-                path="/home/syre/builds/ToiletFinder/App/app/src/main/res/layout/toiletgroup_infowindow.xml"
-                qualifiers=""
-                type="layout" />
         </source>
         <source path="/home/syre/builds/ToiletFinder/App/app/build/res/rs/debug" />
         <source path="/home/syre/builds/ToiletFinder/App/app/build/res/generated/debug" />

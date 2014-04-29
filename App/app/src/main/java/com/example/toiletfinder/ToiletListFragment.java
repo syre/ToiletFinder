@@ -21,7 +21,7 @@ public class ToiletListFragment extends android.support.v4.app.ListFragment
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
 	{
-		ToiletStorage.fetchToilets();
+		ToiletStorage.fetchToiletGroups(null);
 		adapter = new ToiletListAdapter(getActivity(), ToiletStorage.getToiletGroups());
 		setListAdapter(adapter);
 		return inflater.inflate(R.layout.toiletlistfragment, null);

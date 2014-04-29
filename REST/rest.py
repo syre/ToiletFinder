@@ -33,6 +33,7 @@ def index():
     group_arguments = ["id", "name", "lat", "lng"]
     toilet_arguments = ['id', 'group_id', 'description', 'location', 'occupied', 'methane_level', 'lat', "lng"]
     list = []
+    groupdict = {}
     for group in group_result:
         groupdict = dict(zip(group_arguments, group))
         toilet_result = query_db('select * from toilets where group_id == ?', [group[0]])
@@ -42,10 +43,22 @@ def index():
     list.append(groupdict)
     return flask.jsonify(groups = list)
 
-@app.route("/toiletgroups/nearest/<lat>+<lng>")
-def findNearest15(lat=None, lng=None):
-    results = flask.request.args.get("results")
-    return results
+@app.route("/toiletgroups/<id>")
+def indexSpecific(id=None):
+    id = int(id)
+    group_result = query_db('select * from toilet_group where id == '+str(id))
+    group_arguments = ["id", "name", "lat", "lng"]
+    toilet_arguments = ['id', 'group_id', 'description', 'location', 'occupied', 'methane_level', 'lat', "lng"]
+    list = []
+    groupdict = {}
+    for group in group_result:
+        groupdict = dict(zip(group_arguments, group))
+        toilet_result = query_db('select * from toilets where group_id == ?', [group[0]])
+        groupdict['toilets'] = []
+        for toilet in toilet_result:
+            groupdict['toilets'].append(dict(zip(toilet_arguments, toilet)))
+    list.append(groupdict)
+    return flask.jsonify(groups = list)
 
 if __name__ == '__main__':
 	app.run(host="0.0.0.0", debug = True, port=5000)

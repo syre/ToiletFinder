@@ -56,13 +56,10 @@ public class ToiletStorage
 		}
 		return null;
 	}
-	
 
-	
-	
-	public static Boolean fetchToilets()
+	public static Boolean fetchToiletGroups(Integer groupid)
 	{
-		AsyncTask<Void, Void, String> result = new RESTHelper.ToiletRetrieverTask().execute();
+		AsyncTask<Integer, Void, String> result = new RESTHelper.ToiletRetrieverTask().execute(groupid);
 
 		try
 		{

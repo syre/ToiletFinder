@@ -14,21 +14,24 @@ public class RESTHelper
 {
 	public static final String SERVERHOSTNAME = "192.168.1.202";
 	
-	public static class ToiletRetrieverTask extends AsyncTask<Void,Void,String>
+	public static class ToiletRetrieverTask extends AsyncTask<Integer,Void,String>
 	{
 
 		@Override
-		protected String doInBackground(Void... params)
+		protected String doInBackground(Integer... params)
 		{
-			return RESTHelper.retrieveToiletsFromREST();
+            Integer id = params[0];
+			return RESTHelper.retrieveToiletsFromREST(id);
 		}
 		
 	}
-	public static String retrieveToiletsFromREST()
+	public static String retrieveToiletsFromREST(Integer id)
 	{
+
 		String port = "5000";
 		String protocol = "http://";
-		String rest_url = protocol+SERVERHOSTNAME+":"+port+"/toiletgroups/";
+		String rest_url = (id != null ? protocol+SERVERHOSTNAME+":"+port+"/toiletgroups/"+id :
+                                        protocol+SERVERHOSTNAME+":"+port+"/toiletgroups/");
 		HttpURLConnection connection = null;
 		String requeststring = null;
 		try
