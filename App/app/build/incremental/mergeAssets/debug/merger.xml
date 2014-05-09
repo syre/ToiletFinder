@@ -2,10 +2,10 @@
 <merger>
 
     <dataSet config="main" >
-        <source path="/home/syre/builds/ToiletFinder/App/app/src/main/assets" />
+        <source path="/Users/aha/Documents/ToiletFinder/App/app/src/main/assets" />
     </dataSet>
     <dataSet config="debug" >
-        <source path="/home/syre/builds/ToiletFinder/App/app/src/debug/assets" />
+        <source path="/Users/aha/Documents/ToiletFinder/App/app/src/debug/assets" />
     </dataSet>
 
 </merger>
