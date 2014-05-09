@@ -1,6 +1,7 @@
 -- delete existing tables
 drop table if exists toilets;
 drop table if exists toilet_group;
+drop table if exists events;
 
 -- create schema
 create table toilets (
