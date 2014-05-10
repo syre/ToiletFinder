@@ -29,12 +29,27 @@ def persist(mosq, obj, msg):
         connection.commit()
         connection.close()
 
+def connect_callback(mosq, obj, rc):
+    if rc == 0:
+        print("connected to broker")
+    else:
+        print("could not connect to broker, error code: "+ str(rc))
+
+def disconnect_callback(mosq, obj, rc):
+    if rc == 0:
+        print("disconnected from broker")
+    else:
+        print("disconnected from broker, error code: "+str(rc))
 
 mypid = os.getpid()
 mqttc = mosquitto.Mosquitto(str(mypid))
-mqttc.connect(HOSTNAME, PORT, 60, True)
 
 mqttc.on_message = persist
+mqttc.on_connect = connect_callback
+mqttc.on_disconnect = disconnect_callback
+
+mqttc.connect(HOSTNAME, PORT, 60, True)
+
 mqttc.subscribe("persist", 0)
 
 while(mqttc.loop() == 0):
