@@ -1,28 +1,20 @@
 #!/usr/bin/python3
 
-import pika
+import mosquitto
+import os
 import json
 import sqlite3
 import time
 
 DATABASE = 'toilets.sqlite3'
+HOSTNAME = "127.0.0.1"
+PORT = 1883
 
 def connect_db():
     return sqlite3.connect(DATABASE)
 
-
-cred = pika.PlainCredentials("node", "node")
-connection = pika.BlockingConnection(pika.ConnectionParameters("127.0.0.1",credentials=cred))
-
-channel = connection.channel()
-channel.exchange_declare(exchange="logs", type="fanout")
-result = channel.queue_declare()
-
-queue_name = result.method.queue
-
-channel.queue_bind(exchange="logs", queue=queue_name)
-def callback(ch, method, properties, body):
-        message = json.loads(body.decode())
+def persist(mosq, obj, msg):
+        message = json.loads(msg.payload.decode())
         print("%r" % message)
         if (message["occupied"]):
             message["occupied"] = 1
@@ -30,11 +22,22 @@ def callback(ch, method, properties, body):
             message["occupied"] = 0
         connection = connect_db()
         c = connection.cursor()
+        # persist data to events table
         c.execute("insert into events values (NULL,?,?,?,?,?)", [message["group_id"], message["toilet_id"], message["methane_level"], message["occupied"], message["time_stamp"]])
+        # update specific toilet
+        c.execute("update toilets set occupied=?, methane_level=? where id=?", [message["occupied"], message["methane_level"], message["toilet_id"]])
         connection.commit()
         connection.close()
 
-channel.basic_consume(callback, queue=queue_name, no_ack=True)
-channel.start_consuming()
-connection.close()
-close_connection()
+
+mypid = os.getpid()
+mqttc = mosquitto.Mosquitto(str(mypid))
+mqttc.connect(HOSTNAME, PORT, 60, True)
+
+mqttc.on_message = persist
+mqttc.subscribe("persist", 0)
+
+while(mqttc.loop() == 0):
+    pass
+
+mqttc.disconnect()

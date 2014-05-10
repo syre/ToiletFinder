@@ -1,20 +1,22 @@
 #!/usr/bin/python3
-import pika
-import json
 
-cred = pika.PlainCredentials("node", "node")
-connection = pika.BlockingConnection(pika.ConnectionParameters("127.0.0.1",credentials=cred))
+import mosquitto
+import os
 
-channel = connection.channel()
-channel.exchange_declare(exchange="logs", type="fanout")
-result = channel.queue_declare()
+HOSTNAME = "127.0.0.1"
+PORT = 1883
 
-queue_name = result.method.queue
+pid = os.getpid()
+mqttc = mosquitto.Mosquitto(str(pid))
+mqttc.connect(HOSTNAME, PORT, 60, True)
 
-channel.queue_bind(exchange="logs", queue=queue_name)
-def callback(ch, method, properties, body):
-        print("%r" % json.loads(body.decode()))
+def on_message(mosq, obj, msg):
+    print("Message received on topic "+msg.topic+" with QoS "+str(msg.qos)+" and payload "+msg.payload.decode())
 
-channel.basic_consume(callback, queue=queue_name, no_ack=True)
-channel.start_consuming()
-connection.close()
+mqttc.on_message = on_message
+mqttc.subscribe("persist", 0)
+
+while(mqttc.loop() == 0):
+    pass
+
+mqttc.disconnect()

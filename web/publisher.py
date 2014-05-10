@@ -1,16 +1,24 @@
 #!/usr/bin/python3
 
-import pika
-import json
+import mosquitto
+import os
+import time
 import datetime
+import json
 
-cred = pika.PlainCredentials("node", "node")
-connection = pika.BlockingConnection(pika.ConnectionParameters("127.0.0.1",credentials=cred))
+HOSTNAME = "127.0.0.1"
+PORT = 1883
 
-channel = connection.channel()
-channel.exchange_declare(exchange="logs", type="fanout")
-message = {"group_id":1, "toilet_id": 2, "occupied":False, "methane_level": 20, "time_stamp": str(datetime.datetime.now())}
+pid = os.getpid()
 
-channel.basic_publish(exchange="logs",routing_key="", body=json.dumps(message))
+mqttc = mosquitto.Mosquitto(str(pid))
+mqttc.connect(HOSTNAME, PORT, 60, True)
 
-connection.close()
+message = {"group_id":1, "toilet_id": 2, "occupied":False, "methane_level": 100, "time_stamp": str(datetime.datetime.now())}
+jsonstring = json.dumps(message)
+
+while(mqttc.loop() == 0):
+    time.sleep(1)
+    mqttc.publish("persist", jsonstring, 0)
+
+mqttc.disconnect()
