@@ -57,7 +57,7 @@ mqttc.on_subscribe = subscribe_callback
 
 mqttc.connect(HOSTNAME, PORT, 60, True)
 
-result, mid = mqttc.subscribe("persist", 0)
+result, mid = mqttc.subscribe("persist", 2)
 if (result == 0):
     print("subscribed successfully")
     mqttc.loop_forever()

@@ -38,6 +38,6 @@ jsonstring = json.dumps(message)
 
 while(mqttc.loop() == 0):
     time.sleep(1)
-    mqttc.publish("persist", jsonstring, 0)
+    mqttc.publish("persist", jsonstring, 2)
 
 mqttc.disconnect()
