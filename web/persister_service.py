@@ -42,10 +42,10 @@ def disconnect_callback(mosq, obj, rc):
         print("disconnected from broker, error code: "+str(rc))
 
 def subscribe_callback(mosq, userdat, mid, granted_qos):
-    if mid == 0:
-        print("subscribed successfully")
+    if granted_qos:
+        print("granted QoS levels for subscription: "+str(granted_qos))
     else:
-        print("could not subscribe, error code: "+str(mid))
+        print("could not get granted QoS levels")
         
 mypid = os.getpid()
 mqttc = mosquitto.Mosquitto(str(mypid))
@@ -57,6 +57,10 @@ mqttc.on_subscribe = subscribe_callback
 
 mqttc.connect(HOSTNAME, PORT, 60, True)
 
-mqttc.subscribe("persist", 0)
-
-mqttc.loop_forever()
+result, mid = mqttc.subscribe("persist", 0)
+if (result == 0):
+    print("subscribed successfully")
+    mqttc.loop_forever()
+else:
+    print("could not subscribe")
+    mqttc.disconnect()
