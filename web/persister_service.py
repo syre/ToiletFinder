@@ -41,12 +41,19 @@ def disconnect_callback(mosq, obj, rc):
     else:
         print("disconnected from broker, error code: "+str(rc))
 
+def subscribe_callback(mosq, userdat, mid, granted_qos):
+    if mid == 0:
+        print("subscribed successfully")
+    else:
+        print("could not subscribe, error code: "+str(mid))
+        
 mypid = os.getpid()
 mqttc = mosquitto.Mosquitto(str(mypid))
 
 mqttc.on_message = persist
 mqttc.on_connect = connect_callback
 mqttc.on_disconnect = disconnect_callback
+mqttc.on_subscribe = subscribe_callback
 
 mqttc.connect(HOSTNAME, PORT, 60, True)
 
