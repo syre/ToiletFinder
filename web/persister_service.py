@@ -52,7 +52,6 @@ mqttc.connect(HOSTNAME, PORT, 60, True)
 
 mqttc.subscribe("persist", 0)
 
-while(mqttc.loop() == 0):
-    pass
+mqttc.loop_forever()
 
 mqttc.disconnect()
