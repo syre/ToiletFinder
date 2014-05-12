@@ -62,5 +62,5 @@ if (result == 0):
     print("subscribed successfully")
     mqttc.loop_forever()
 else:
-    print("could not subscribe")
+    print("could not subscribe, connection not established")
     mqttc.disconnect()
